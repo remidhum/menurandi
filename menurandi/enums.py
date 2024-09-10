@@ -81,7 +81,7 @@ class StorageType(StrEnum):
 
 class QuantityType(StrEnum):
 	"""
-	Enum the different kinds of Quantities one can encounter in a recipe. Use for converting Imperial to Metric units.
+	Enum the different kinds of Quantities one can encounter in a recipe. Use for converting Volume to Mass units.
 	To be extended as needed.
 	"""
 	Flour = auto()
@@ -116,83 +116,6 @@ class QuantityType(StrEnum):
 	CoconutMilk = auto()
 	Butter = auto()
 	ChocolateChips = auto()
-
-
-class ImperialVolumeUnit(StrEnum):
-	Teaspoon = auto()
-	Tablespoon = auto()
-	Cup = auto()
-
-
-class MetricVolumeUnit(StrEnum):
-	Milliliter = auto()
-	Deciliter = auto()
-	Liter = auto()
-
-
-class VolumeUnit(ImperialVolumeUnit, MetricVolumeUnit):
-	pass
-
-
-ImperialVolumetricConversionMap = {
-	(ImperialVolumeUnit.Teaspoon, ImperialVolumeUnit.Tablespoon): 1,
-	(ImperialVolumeUnit.Tablespoon, ImperialVolumeUnit.Cup): 1,
-	(ImperialVolumeUnit.Cup, ImperialVolumeUnit.Teaspoon): 1,
-}
-MetricVolumetricConversionMap = {
-	(MetricVolumeUnit.Milliliter, MetricVolumeUnit.Deciliter): 1,
-	(MetricVolumeUnit.Deciliter, MetricVolumeUnit.Liter): 1,
-	(MetricVolumeUnit.Liter, MetricVolumeUnit.Milliliter): 1,
-}
-VolumetricConversionMap = {
-	(MetricVolumeUnit.Milliliter, ImperialVolumeUnit.Cup): 1,
-	(ImperialVolumeUnit.Cup, MetricVolumeUnit.Milliliter): 1,
-}
-
-
-class ImperialMassUnit(StrEnum):
-	Ounce = auto()
-	Pound = auto()
-
-
-class MetricMassUnit(StrEnum):
-	Gram = auto()
-	Kilogram = auto()
-
-
-class MassUnit(ImperialMassUnit, MetricMassUnit):
-	pass
-
-
-class PreciseUnit(VolumeUnit, MassUnit):
-	pass
-
-
-class UnitType(StrEnum):
-	Volume = auto()
-	Mass = auto()
-
-
-class Unit(PreciseUnit):
-	"""
-	Enum the different kinds of quantities that can be used in recipe instructions.
-	To be extended as needed.
-	"""
-	Drop = auto()
-	Pinch = auto()
-	Dash = auto()
-	Slice = auto()
-	Piece = auto()
-	Bundle = auto()
-
-
-class UnitConvention(StrEnum):
-	"""
-	Enum the different kinds of units to switch to and from.
-	"""
-	Metric = auto()
-	Imperial = auto()
-	Other = auto()
 
 
 class MealType(StrEnum):

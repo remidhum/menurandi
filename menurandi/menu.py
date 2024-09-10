@@ -19,14 +19,14 @@ class Meal:
 		return reduce(operator.add, [recipe.instructions.estimated_duration for recipe in self.recipes])
 
 	@property
-	def effective_scaling_factor(self) -> float:
-		return sum([guest.scaling_factor for guest in self.guests])
+	def portions(self) -> float:
+		return sum([guest.portion for guest in self.guests])
 
 	@property
 	def quantities(self) -> Quantities:
 		quantities_list = [recipe.instructions.normalized_quantities for recipe in self.recipes]
 		normalized_quantities = add_quantities(quantities_list=quantities_list)
-		return scale_quantities(quantities=normalized_quantities, factor=self.effective_scaling_factor)
+		return scale_quantities(quantities=normalized_quantities, factor=self.portions)
 
 
 Meals = list[Meal]

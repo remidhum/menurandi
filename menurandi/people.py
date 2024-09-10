@@ -27,7 +27,7 @@ class Guest:
 	"""
 	age_group: AgeGroupType
 	# allergies: RecipeIngredients  # TODO: fix circularity
-	scaling_factor: float  # How many portions does the guest consume?  TODO: transform into a recipe based map?
+	portion: float  # TODO: transform into a recipe/ingredient based map?
 
 
 Guests = set[Guest]
