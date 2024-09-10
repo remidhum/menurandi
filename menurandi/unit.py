@@ -24,6 +24,10 @@ class UnitName(StrEnum):
 
 
 class UnitType(StrEnum):
+	"""
+	Enum the different types of units.
+	Other is used for general imprecise cooking units like a pinch or a drop.
+	"""
 	Volume = auto()
 	Mass = auto()
 	Other = auto()
@@ -39,6 +43,10 @@ class UnitConvention(StrEnum):
 
 @dataclass
 class Unit:
+	"""
+	Fully define a unit using enums to prevent issues with unsupported items.
+	TODO: add validation? there are no restrictions for type and convention. Should be derived from a map? a DB?
+	"""
 	name: UnitName
 	type: UnitType
 	convention: UnitConvention | None
@@ -48,6 +56,10 @@ class Unit:
 
 	@property
 	def is_precise(self) -> bool:
+		"""
+		Precise units can be converted to S.I.
+		An example of a non-precise unit is a "splash" or a "pinch".
+		"""
 		return self.convention is not None
 
 	@property
@@ -58,10 +70,16 @@ class Unit:
 
 
 def get_si_unit(unit: Unit) -> Unit:
+	"""
+	Find the relevant S.I. unit for any given unit.
+	"""
 	return Unit(name=SI_UNIT_MAP[unit.type], type=unit.type, convention=UnitConvention.Metric)
 
 
-SI_UNIT_MAP = {UnitType.Volume: UnitName.Liter, UnitType.Mass: UnitName.Gram}
+SI_UNIT_MAP = {
+	UnitType.Volume: UnitName.Liter,
+	UnitType.Mass: UnitName.Gram
+}
 SI_FACTOR_MAP = {
 	UnitName.Teaspoon: 0.00492892,
 	UnitName.Tablespoon: 0.0147868,

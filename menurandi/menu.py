@@ -10,6 +10,9 @@ from menurandi.recipe import Quantities, Recipes, add_quantities, scale_quantiti
 
 @dataclass
 class Meal:
+	"""
+	A Meal is a collection of Recipes to execute by a Cook for Guests.
+	"""
 	recipes: Recipes
 	guests: Guests
 	cook: Cook
@@ -36,6 +39,9 @@ DailyMeals = dict[MealType, Meal]
 
 @dataclass(order=True)
 class DailyMenu:
+	"""
+	A DailyMenu is set for a specific date and groups a collection of DailyMeal (one per meal type).
+	"""
 	date: datetime.date
 	meals: DailyMeals
 
@@ -53,11 +59,14 @@ DailyMenus = list[DailyMenu]
 
 @dataclass
 class Menu:
+	"""
+	A Menu is simply a collection of DailyMenu with some utility and grouping methods.
+	"""
 	daily_menus: DailyMenus
 
 	@property
 	def start_date(self) -> datetime.date:
-		return min(self.daily_menus).date
+		return min([daily_menu.date for daily_menu in self.daily_menus])
 
 	@property
 	def menu_dates(self) -> list[datetime.date]:

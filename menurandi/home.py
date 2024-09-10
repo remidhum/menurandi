@@ -4,7 +4,6 @@ from menurandi.enums import CookingEquipments
 from menurandi.people import Cooks
 from menurandi.recipe import RecipeIngredient
 
-
 Stock = dict[RecipeIngredient, int]
 
 
